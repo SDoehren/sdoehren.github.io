@@ -5,7 +5,6 @@ tagline: Supporting tagline
 ---
 {% include JB/setup %}
 
-{% include header.html %}
 
 ssssssssssssssssssssss
 
