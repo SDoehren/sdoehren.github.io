@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>SDoehren's Rolling For Points Buy</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <style>
+        h1 {text-align: center;}
+        p {text-align: center;}
+        div {text-align: center;}
+
+        input[type="number"] {font-size:30px; font-weight: bold;}
+
+        body {
+    background-color: #454545;
+    color: #E8E8E8;
+    font-family: 'Lato';
+}
+        .container-fluid {padding: 50px 25px 25px 25px;}
+
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <h1>SDoehren's Rolling For Points Buy</h1>
+        </div>
+        <br>
+        <div class="row">
+            <p><a href="https://ko-fi.com/sdoehren" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/ko--fi-Support%20Me-red?style=flat-square&amp;logo=ko-fi" alt="ko-fi"></a>
+<a href="https://www.patreon.com/bePatron?u=49614365" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Patreon-Support%20Me-red?style=flat-square&amp;logo=patreon" alt="Patreon"></a></p>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+                <div class="col-10 col-lg-6">
+                    <h2>Process</h2>
+                    <ol>
+                    <li>Set highest and lowest rolls to min and max available ability scores.  </li>
+                    <li>Distribute the rolls based on value.  </li>
+                    <li>Allocate points  to the remaining 4 abilities based on the distribution.  </li>
+                    <li>Adjust scores to avoid wasted points.  </li>
+                    </ol>
+                </div>
+        </div>
+        <div class="row justify-content-center">
+                <div class="col-10">
+                    <p>Ability score-points cost based on <a href="https://chicken-dinner.com/5e/5e-point-buy.html">5e Point Buy Calculator</a> default values.</p>
+                </div>
+        </div>
+        <div class="row justify-content-center">
+            <h2>Settings</h2>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-4 col-lg-2">
+                <label for="Points Available">Points Available</label>
+                <input id="Points Available" name="Points Available" class="form-control" type="number" min="1" value="27" style="text-align:center;" onchange="adjustabs()">
+            </div>
+            <div class="col-4 col-lg-2">
+                <label for="Min Ability Score">Minimum Score</label>
+                <input id="Min Ability Score" name="Min Ability Score" class="form-control" type="number" min="3" max="18" value="8" style="text-align:center;" onchange="adjustabs()">
+            </div>
+            <div class="col-4 col-lg-2">
+                <label for="Max Ability Score">Maximum Score</label>
+                <input id="Max Ability Score" name="Max Ability Score" class="form-control" type="number" min="1" max="18" value="15" style="text-align:center;" onchange="adjustabs()">
+            </div>
+        </div>
+        <div id="ERROR MESSAGE" class="row justify-content-md-center">
+        </div>
+        <br>
+        <div class="row justify-content-center">
+            <h2>Roll Result</h2>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-4 col-lg-2 col-xl-1" >
+                <label for="Roll1">Roll 1</label>
+                <input id="Roll1" name="Roll1" class="form-control input-lg" type="number" min="1" value="15" style="text-align:center;" onchange="adjustabs()">
+            </div>
+            <div class="col-4 col-lg-2 col-xl-1" >
+                <label for="Roll2">Roll 2</label>
+                <input id="Roll2" name="Roll2" class="form-control input-lg" type="number" min="1" value="14" style="text-align:center;" onchange="adjustabs()">
+            </div>
+            <div class="col-4 col-lg-2 col-xl-1" >
+                <label for="Roll3">Roll 3</label>
+                <input id="Roll3" name="Roll3" class="form-control input-lg" type="number" min="1" value="13" style="text-align:center;" onchange="adjustabs()">
+            </div>
+            <div class="col-4 col-lg-2 col-xl-1" >
+                <label for="Roll4">Roll 4</label>
+                <input id="Roll4" name="Roll4" class="form-control input-lg" type="number" min="1" value="12" style="text-align:center;" onchange="adjustabs()">
+            </div>
+            <div class="col-4 col-lg-2 col-xl-1" >
+                <label for="Roll5">Roll 5</label>
+                <input id="Roll5" name="Roll5" class="form-control input-lg" type="number" min="1" value="10" style="text-align:center;" onchange="adjustabs()">
+            </div>
+            <div class="col-4 col-lg-2 col-xl-1" >
+                <label for="Roll6">Roll 6</label>
+                <input id="Roll6" name="Roll6" class="form-control input-lg" type="number" min="1" value="8" style="text-align:center;" onchange="adjustabs()">
+            </div>
+
+        </div>
+        <br>
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-6" >
+              <button type="button" class="btn btn-outline-light" onclick="randomiseroll()">Randomize Roll</button>
+            </div>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+            <h2>Outcome</h2>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-4 col-lg-2 col-xl-1" >
+                <label for="Ability1">Ability Score 1</label>
+                <input id="Ability1" name="Ability1" class="form-control input-lg" type="number" min="1" value="15" style="text-align:center;" disabled>
+            </div>
+            <div class="col-4 col-lg-2 col-xl-1" >
+                <label for="Ability2">Ability Score 2</label>
+                <input id="Ability2" name="Ability2" class="form-control input-lg" type="number" min="1" value="14" style="text-align:center;" disabled>
+            </div>
+            <div class="col-4 col-lg-2 col-xl-1" >
+                <label for="Ability3">Ability Score 3</label>
+                <input id="Ability3" name="Ability3" class="form-control input-lg" type="number" min="1" value="13" style="text-align:center;" disabled>
+            </div>
+            <div class="col-4 col-lg-2 col-xl-1" >
+                <label for="Ability4">Ability Score 4</label>
+                <input id="Ability4" name="Ability4" class="form-control input-lg" type="number" min="1" value="12" style="text-align:center;" disabled>
+            </div>
+            <div class="col-4 col-lg-2 col-xl-1" >
+                <label for="Ability5">Ability Score 5</label>
+                <input id="Ability5" name="Ability5" class="form-control input-lg" type="number" min="1" value="10" style="text-align:center;" disabled>
+            </div>
+            <div class="col-4 col-lg-2 col-xl-1" >
+                <label for="Ability6">Ability Score 6</label>
+                <input id="Ability6" name="Ability6" class="form-control input-lg" type="number" min="1" value="8" style="text-align:center;" disabled>
+            </div>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+            <h4>Points Allocated</h4>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-4 col-lg-2 col-xl-1" >
+                <input id="Points1" name="Ability1" class="form-control input-lg" type="number" min="1" value="9" style="text-align:center;" disabled>
+            </div>
+            <div class="col-4 col-lg-2 col-xl-1" >
+                <input id="Points2" name="Ability2" class="form-control input-lg" type="number" min="1" value="7" style="text-align:center;" disabled>
+            </div>
+            <div class="col-4 col-lg-2 col-xl-1" >
+                <input id="Points3" name="Ability3" class="form-control input-lg" type="number" min="1" value="5" style="text-align:center;" disabled>
+            </div>
+            <div class="col-4 col-lg-2 col-xl-1" >
+                <input id="Points4" name="Ability4" class="form-control input-lg" type="number" min="1" value="4" style="text-align:center;" disabled>
+            </div>
+            <div class="col-4 col-lg-2 col-xl-1" >
+                <input id="Points5" name="Ability5" class="form-control input-lg" type="number" min="1" value="2" style="text-align:center;" disabled>
+            </div>
+            <div class="col-4 col-lg-2 col-xl-1" >
+                <input id="Points6" name="Ability6" class="form-control input-lg" type="number" min="1" value="0" style="text-align:center;" disabled>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-10 col-md-5 col-lg-3 col-xl-2" >
+                <label for="Leftover Points">Leftover Points</label>
+                <input id="Leftover Points" name="Leftover Points" class="form-control input-lg" type="number" min="1" value="0" style="text-align:center;" disabled>
+            </div>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max)+1;
+    }
+
+    function shuffle(array) {
+        var currentIndex = array.length,  randomIndex;
+
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+
+            // Pick a remaining element...
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+
+            // And swap it with the current element.
+            [array[currentIndex], array[randomIndex]] = [
+              array[randomIndex], array[currentIndex]];
+        }
+
+        return array;
+    }
+
+
+    function randomiseroll(){
+        var rollresults = []
+        var i;
+        for (i = 1; i <= 6; i++) {
+            let rolls = [getRandomInt(6),getRandomInt(6),getRandomInt(6),getRandomInt(6)];
+            let minval = Math.min(...rolls);
+            let sumval = rolls.reduce((a, b) => a + b, 0)-minval;
+            rollresults.push(sumval);
+
+        }
+        rollresults.sort(function(a, b) {
+            return b - a;
+        });
+        for (i = 0; i < 6; i++) {
+            let a=i+1
+            var s= document.getElementById("Roll"+a);
+            s.value = rollresults[i];
+        }
+        adjustabs();
+    }
+
+    function adjustabs(){
+        var ERROR= document.getElementById("ERROR MESSAGE");
+
+        const scorevalue = {18:19,
+            17:15,
+            16:12,
+            15:9,
+            14:7,
+            13:5,
+            12:4,
+            11:3,
+            10:2,
+            9:1,
+            8:0,
+            7:-1,
+            6:-2,
+            5:-4,
+            4:-6,
+            3:-9,
+        };
+
+
+        let AvailablePoints=document.getElementById("Points Available").value;
+        let MinScore = parseInt(document.getElementById("Min Ability Score").value);
+        let MaxScore = parseInt(document.getElementById("Max Ability Score").value);
+
+        if (MinScore>MaxScore){
+            MaxScore = parseInt(document.getElementById("Min Ability Score").value);
+            MinScore = parseInt(document.getElementById("Max Ability Score").value);
+        }
+
+
+        let rolls = []
+        var i;
+
+        for (i = 1; i <= 6; i++) {
+            var s= document.getElementById("Roll"+i).value;
+            rolls.push(s);
+        }
+
+        let adjustedarray = [];
+
+        let minroll = Math.min(...rolls)
+        for (i = 0; i < rolls.length; i++) {
+            var r = rolls[i];
+            adjustedarray.push(r-minroll);
+        }
+
+        if (Math.max(...adjustedarray)==0){
+            adjustedarray = [1,1,1,1,1,1];
+        }
+
+        let correctedarray = [];
+        for (i = 0; i < adjustedarray.length; i++) {
+            var r = adjustedarray[i]/Math.max(...adjustedarray);
+            correctedarray.push(r);
+        }
+
+        let AdjustedPoints=AvailablePoints-(scorevalue[MinScore]*6)
+
+        let adjustedscorevalues = {}
+
+        let keys = Object.keys(scorevalue);
+        for (i = 0; i < keys.length; i++) {
+            let k = parseInt(keys[i]);
+            if ((k >= MinScore) && (k <= MaxScore)){
+                adjustedscorevalues[k] = scorevalue[k]-scorevalue[MinScore]
+            }
+        }
+
+        let adjustedvaluescore = {}
+        keys = Object.keys(adjustedscorevalues);
+        for (i = 0; i < keys.length; i++) {
+            let k = parseInt(keys[i]);
+            adjustedvaluescore[adjustedscorevalues[k]] = k;
+        }
+
+
+        let StatingAdjustedPoints = AdjustedPoints-adjustedscorevalues[MaxScore]
+
+        adjustedarray = correctedarray.slice(1, -1)
+
+        if (adjustedarray.reduce((a, b) => a + b, 0)===0) {
+            adjustedarray = [1,1,1,1]
+        }
+
+        let adjestedsum = adjustedarray.reduce((a, b) => a + b, 0)
+        adjustedarray = adjustedarray.map(x => x/adjestedsum)
+
+        let adjustedarraypoints = adjustedarray.map(x => parseInt(x*StatingAdjustedPoints))
+
+        let RemainingAdjustedPoints = StatingAdjustedPoints-adjustedarraypoints.reduce((a, b) => a + b, 0)
+
+        if (RemainingAdjustedPoints<0){
+            ERROR.innerHTML = "<p>Min Ability Score set too high or Points Available set too low</p>"
+            return;
+        } else {
+            ERROR.innerHTML = ""
+        }
+
+        let apdict = {
+            4: [1, 1, 1, 1],
+            3: [1, 1, 1, 0],
+            2: [1, 1, 0, 0],
+            1: [1, 0, 0, 0],
+            0: [0, 0, 0, 0],
+        }
+
+        let additionalpoints = apdict[RemainingAdjustedPoints]
+
+        adjustedarraypoints = adjustedarraypoints.map(function (num, idx) {
+            return num + additionalpoints[idx];
+        });
+
+        let adjustedarraypointshold = adjustedarraypoints
+        let converged = false
+        let attempts = 0
+        let AAPsum;
+        let APsum;
+        let counter;
+        while (attempts===0 || !converged ) {
+            attempts+=1
+
+
+            AAPsum = adjustedarraypoints.reduce((a, b) => a + b, 0)
+            RemainingAdjustedPoints = StatingAdjustedPoints - AAPsum
+
+            if (RemainingAdjustedPoints<0) {
+                additionalpoints = [-1,-1,-1,-1]
+            } else if (RemainingAdjustedPoints>4){
+                additionalpoints = apdict[4]
+            } else if (attempts<100){
+                additionalpoints = apdict[RemainingAdjustedPoints]
+            } else {
+                additionalpoints = [Math.random(),Math.random(),Math.random(),Math.random()]
+                APsum = additionalpoints.reduce((a, b) => a + b, 0)
+                additionalpoints = additionalpoints.map(x => parseInt(x/APsum*RemainingAdjustedPoints))
+            }
+            counter = 0;
+            while (additionalpoints.reduce((a, b) => a + b, 0)<RemainingAdjustedPoints){
+                counter+=1
+                if (counter>100){break;}
+                if (RemainingAdjustedPoints>4){
+                    additionalpoints = additionalpoints.map(x=>x+1);
+                } else if (RemainingAdjustedPoints<0){
+                    additionalpoints = [-1,-1,-1,-1]
+                    break
+                } else {
+                    let bonus = RemainingAdjustedPoints%4
+                    bonus = apdict[bonus];
+                    additionalpoints = additionalpoints.map(function (num, idx) {
+                        return num + bonus[idx];
+                    });
+                }
+            }
+
+            if (attempts<100) {
+                additionalpoints.sort(function (a, b) {
+                    return b - a;
+                });
+            } else {
+                additionalpoints = shuffle(additionalpoints)
+            }
+
+            adjustedarraypoints = adjustedarraypoints.map(function (num, idx) {
+                        return num + additionalpoints[idx];
+                    });
+
+            converged=true
+
+            keys = Object.keys(adjustedvaluescore);
+            keys = keys.map(x=>parseInt(x));
+            for (i = 0; i < 4; i++) {
+                let abpoints = adjustedarraypoints[i]
+                counter = 0;
+                while (!(keys.includes(abpoints))){
+                    if (counter>100){break;}
+                    abpoints-=1
+                    converged=false
+                }
+                adjustedarraypoints[i]=abpoints
+            }
+
+            if (attempts > 500){
+                break;
+            }
+        }
+
+        RemainingAdjustedPoints = StatingAdjustedPoints - adjustedarraypoints.reduce((a, b) => a + b, 0)
+
+        let newarray = []
+
+        for (i = 0; i < 4; i++) {
+            let z = adjustedarraypoints[i]
+            newarray.push(adjustedvaluescore[z])
+        }
+
+        let finalarray = [parseInt(MinScore),parseInt(MaxScore)]
+        finalarray = finalarray.concat(newarray)
+        finalarray.sort(function (a, b) {
+                    return b - a;
+                });
+
+        for (i = 0; i < 6; i++) {
+            var s= document.getElementById("Ability"+(i+1));
+            s.value = finalarray[i];
+            var s2= document.getElementById("Points"+(i+1));
+            s2.value = scorevalue[finalarray[i]];
+        }
+
+        var left= document.getElementById("Leftover Points");
+
+        left.value = RemainingAdjustedPoints;
+
+        console.log(rolls);
+        console.log(finalarray);
+    }
+
+</script>
+
+
+</html>
