@@ -104,7 +104,7 @@ JB :
   analytics :
     provider : google
     gauges :
-        site_id : '275591054'
+        site_id : ''
     google : 
         tracking_id : 'G-M3RGJ7VH5D'
     getclicky :
