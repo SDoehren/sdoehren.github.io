@@ -8,14 +8,13 @@ highlighter: pygments
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
 #
-title : SDoehren.github
+title : SDoehren.github.io
 tagline: Site Tagline
 author :
-  name : Name Lastname
+  name : SDoehren
   email : blah@email.test
-  github : username
-  twitter : username
-  feedburner : feedname
+  github : SDoehren
+  twitter : SDoehren
 
 # The production_url is only used when full-domain names are needed
 # such as sitemap.txt 
