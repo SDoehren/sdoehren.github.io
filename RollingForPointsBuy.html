@@ -128,7 +128,9 @@
         <br>
         <div class="row justify-content-center">
             <div class="col-12 col-lg-6" >
-              <button type="button" class="btn btn-outline-light" onclick="randomiseroll()">Randomize Roll (4d6dl)</button>
+              <button type="button" class="btn btn-outline-light" onclick="randomiseroll('4d6dl')">Randomize Roll (4d6dl)</button>
+              <button type="button" class="btn btn-outline-light" onclick="randomiseroll('3d6')">Randomize Roll (3d6)</button>
+              <button type="button" class="btn btn-outline-light" onclick="randomiseroll('1d20')">Randomize Roll (1d20)</button>
             </div>
         </div>
         <br>
@@ -223,18 +225,55 @@
         return array;
     }
 
-
-    function randomiseroll(){
+    function roll4d6dl(){
         var rollresults = []
         var i;
         for (i = 1; i <= 6; i++) {
             let rolls = [getRandomInt(6),getRandomInt(6),getRandomInt(6),getRandomInt(6)];
-
             let minval = Math.min(...rolls);
             let sumval = rolls.reduce((a, b) => a + b, 0)-minval;
             rollresults.push(sumval);
-
         }
+        return rollresults
+    }
+
+    function roll3d6(){
+        var rollresults = []
+        var i;
+        for (i = 1; i <= 6; i++) {
+            let rolls = [getRandomInt(6),getRandomInt(6),getRandomInt(6)];
+            let sumval = rolls.reduce((a, b) => a + b, 0);
+            rollresults.push(sumval);
+        }
+        return rollresults
+    }
+
+    function roll1d20(){
+        var rollresults = []
+        var i;
+        for (i = 1; i <= 6; i++) {
+            let rolls = [getRandomInt(20)];
+            let sumval = rolls.reduce((a, b) => a + b, 0);
+            rollresults.push(sumval);
+        }
+        return rollresults
+    }
+
+
+    function randomiseroll(roll){
+        var rollresults;
+        if (roll==="4d6dl"){
+            rollresults = roll4d6dl()
+        }
+        if (roll==="3d6"){
+            rollresults = roll3d6()
+        }
+        if (roll==="1d20"){
+            rollresults = roll1d20()
+        }
+
+
+
         rollresults.sort(function(a, b) {
             return b - a;
         });
