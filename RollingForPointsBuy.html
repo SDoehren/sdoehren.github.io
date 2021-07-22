@@ -4,13 +4,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <title>SDoehren's Rolling For Points Buy</title>
+    <link rel="icon" href="img/logo.png">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <style>
         h1 {text-align: center;}
-        p {text-align: center;}
+        p {text-align: center; margin:1px;}
         div {text-align: center;}
 
         input[type="number"] {font-size:30px; font-weight: bold;}
@@ -71,10 +72,6 @@
 
                     <p>Note that due to randomization occurring in specific scenarios some solutions are unstable.</p>
                     <p>As a general rule though, the vast majority of solution are stable.</p>
-                </div>
-        </div>
-        <div class="row justify-content-center">
-                <div class="col-10">
                     <p>Ability score-points cost based on <a href="https://chicken-dinner.com/5e/5e-point-buy.html">5e Point Buy Calculator</a> default values.</p>
                 </div>
         </div>
@@ -232,6 +229,7 @@
         var i;
         for (i = 1; i <= 6; i++) {
             let rolls = [getRandomInt(6),getRandomInt(6),getRandomInt(6),getRandomInt(6)];
+
             let minval = Math.min(...rolls);
             let sumval = rolls.reduce((a, b) => a + b, 0)-minval;
             rollresults.push(sumval);

@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <title>SDoehren's NPC Overlay</title>
+    <link rel="icon" href="img/logo.png">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -283,12 +284,12 @@ async function generateOverlay() {
 
     let TextboxDIV = ''+
         '        <div  id="textbox"  class="NPCOtextbox NPCOslide-in-fwd-left" style="border-color: '+document.getElementById('MessageBorder-Text').value+';background-image: linear-gradient(120deg, '+document.getElementById('MessageBackground1-Text').value+','+document.getElementById('MessageBackground2-Text').value+');width:'+textwidth+'px; display: flex;justify-content: center;align-items: center;">\n' +
-        '            <p class = "text-focus-in" style="font-family: \'Ubuntu\', sans-serif;">'+message+'</p>\n' +
+        '            <p class = "text-focus-in" style="color: '+document.getElementById('MessageFont-Text').value+';font-family: \'Ubuntu\', sans-serif;">'+message+'</p>\n' +
         '        </div>'
 
     let NameboxDIV = ''+
         '        <div  id="namebox" style="border-color: '+document.getElementById('NameBorder-Text').value+'; background-image: linear-gradient(120deg, '+document.getElementById('NameBackground1-Text').value+','+document.getElementById('NameBackground2-Text').value+');" class="NPCOnamebox NPCOslide-in-fwd-left">\n' +
-        '            <p class = "text-focus-in" style=" font-family: \'Sigmar One\', cursive;margin:auto;white-space: nowrap;margin-left: 15px;margin-right: 15px;">'+name+'</p>\n' +
+        '            <p class = "text-focus-in" style="color: '+document.getElementById('NameFont-Text').value+'; font-family: \'Sigmar One\', cursive;margin:auto;white-space: nowrap;margin-left: 15px;margin-right: 15px;">'+name+'</p>\n' +
         '        </div>\n'
 
     let pack = characterimgDIV+TextboxDIV+NameboxDIV;
