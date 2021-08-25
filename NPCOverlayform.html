@@ -185,106 +185,171 @@
     <div class="container-fluid" style="z-index: 5;position:relative">
         <div class="row row-bottom-margin">
             <h1>NPC Overlay</h1>
-            <a class="navbar-brand mx-auto" href="https://github.com/SDoehren/NPCOverlay" target="_blank" rel="noopener noreferrer">
-            <img src="https://img.shields.io/badge/Github-Get%20Module-green?style=flat-square&amp;logo=github" alt="Patreon"></a>
-        </div>
-        <div class="row row-bottom-margin">
-            <div class="col-4">
-                <label id= 'ImageLoc-Label' for='ImageLoc'>Image Location (Use web accessible location and change in Foundry)</label><br>
-                <input type='text' id='ImageLoc' name='ImageLoc' onchange='generateOverlay()' value='img/Hero-portrait.png' style = "width:90%;text-align: left;"><br>
+            <div class="col-5"></div>
+            <div class="col-2">
+                <a href="https://github.com/SDoehren/NPCOverlay" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/badge/Github-Get%20Module-green?style=flat-square&amp;logo=github" alt="Patreon"></a>
             </div>
-        <div class="col-4">
-            <label id= 'Name-Label' for='NamePlate'>Name</label><br>
-            <input type='text' id='NamePlate' name='NamePlate' onchange='generateOverlay()' value='Elfy McBbeg' style = "width:90%;text-align: left;"><br>
-        </div>
-            <div class="col-4">
-                <label id= 'Message-Label' for='Message'>Message</label><br>
-                <input type='text' id='Message' name='Message' onchange='generateOverlay()' value='This is a Test Message' style = "width:90%;text-align: left;"><br>
+            <div class="span3">
+                <button class="btn btn-primary" onclick="Hideform()" value="false" id="hidebutton">Hide Form</button>
+                <button class="btn btn-primary" onclick="generateOverlay()">Repeat Animation</button>
             </div>
         </div>
-        <div class="row row-bottom-margin">
-            <div class="col-4">
-                <div class="row row-bottom-margin">
+        <div id="FormDiv" style="background-color: rgba(80, 80, 80, 0.5);border-radius: 40px;">
+            <div class="row row-bottom-margin">
+                <div class="col-4">
+                    <h3>General</h3>
+                    <div class="row row-bottom-margin">
+                        <div class="col-6">
+                            <label id= 'ImageLoc-Label' for='ImageLoc'>Image Location (Use web accessible location and change in Foundry)</label>
+                        </div>
+                        <div class="col-6">
+                            <input type='text' id='ImageLoc' name='ImageLoc' onchange='generateOverlay()' value='img/Hero-portrait.png' style = "width:90%;text-align: left;">
+                        </div>
+                    </div>
+                    <div class="row row-bottom-margin">
+                        <div class="col-6">
+                            <label id= 'OverlayName-Label' for='OverlayName'>Overlay Name</label>
+                        </div>
+                        <div class="col-6">
+                            <input type='text' id='OverlayName' name='OverlayName' onchange='generateOverlay()' value='Overlay1' style = "width:90%;text-align: left;">
+                        </div>
+                    </div>
+                    <div class="row row-bottom-margin">
+                        <div class="col-6">
+                            <label id= 'Name-Label' for='NamePlate'>Name</label>
+                        </div>
+                        <div class="col-6">
+                            <input type='text' id='NamePlate' name='NamePlate' onchange='generateOverlay()' value='Elfy McBbeg' style = "width:90%;text-align: left;">
+                        </div>
+                    </div>
+                    <div class="row row-bottom-margin">
+                        <div class="col-6">
+                            <label id= 'Message-Label' for='Message'>Dummy Message</label>
+                        </div>
+                        <div class="col-6">
+                            <input type='text' id='Message' name='Message' onchange='generateOverlay()' value='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec cursus vulputate leo, sed commodo sapien pharetra sed. Aliquam eget mauris in leo varius facilisis quis eu sapien. Vivamus id nibh sit amet magna iaculis elementum eget et nibh. Ut cursus, ante ut egestas efficitur, turpis nisi faucibus nisi, vel facilisis nulla erat eu turpis.' style = "width:90%;text-align: left;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4">
                     <h3>Name Plaque</h3>
-                    <div class="col">
-                        <label id= 'NameFont-Label' for='NameFont-Colour'>Font Colour</label><br>
-                        <a style="text-decoration: none;" href="https://www.patreon.com/sdoehren?utm_source=Mainsite&utm_medium=Referral&utm_campaign=NPCOverlay" target="_blank" rel="noopener noreferrer">
-                            <p style="color: #FF424D;margin:0;"><img class="card-img-top" src="img/Digital-Patreon-Logo_FieryCoral.png" alt="Patreon" style="height:20px;width:auto;"> only</p>
-                        </a>
-                        <input type='color' id='NameFont-Colour' name='NameFont-Colour' onchange='ColourChange(this)' value='#ffffff'><br>
-                        <input type='text' id='NameFont-Text' name='NameFont-Text' onchange='TextChange(this)' value='#ffffff' style = "text-align: center;" size="8">
+                    <div class="row row-bottom-margin">
+                        <div class="col-6">
+                            <label id= 'NameFont-Label' for='NameFont-Colour' style="vertical-align:middle; display:inline;">Font Colour</label>
+                            <a style="text-decoration: none;" href="https://www.patreon.com/sdoehren?utm_source=Mainsite&utm_medium=Referral&utm_campaign=NPCOverlay" target="_blank" rel="noopener noreferrer">
+                                <p style="color: #FF424D;margin:0;display:inline;"><img class="card-img-top" src="img/Digital-Patreon-Logo_FieryCoral.png" alt="Patreon" style="height:20px;width:auto;"> only</p>
+                            </a>
+                        </div>
+                        <div class="col-6" >
+                            <input type='color' id='NameFont-Colour' name='NameFont-Colour' onchange='ColourChange(this)' value='#ffffff' style="vertical-align:middle;">
+                            <input type='text' id='NameFont-Text' name='NameFont-Text' onchange='TextChange(this)' value='#ffffff' style = "vertical-align:middle;text-align: center;" size="8">
+                        </div>
                     </div>
-                    <div class="col">
-                        <label id= 'NameBorder-Label' for='NameBorder-Colour'>Border Colour</label><br>
-                        <a style="text-decoration: none;" href="https://www.patreon.com/sdoehren?utm_source=Mainsite&utm_medium=Referral&utm_campaign=NPCOverlay" target="_blank" rel="noopener noreferrer">
-                            <p style="color: #FF424D;margin:0;"><img class="card-img-top" src="img/Digital-Patreon-Logo_FieryCoral.png" alt="Patreon" style="height:20px;width:auto;"> only</p>
-                        </a>
-                        <input type='color' id='NameBorder-Colour' name='NameBorder-Colour' onchange='ColourChange(this)' value='#491b00'><br>
-                        <input type='text' id='NameBorder-Text' name='NameBorder-Text' onchange='TextChange(this)' value='#491b00' style = "text-align: center;" size="8">
+                    <div class="row row-bottom-margin">
+                        <div class="col-6">
+                            <label id= 'NameBorder-Label' for='NameBorder-Colour' style="vertical-align:middle; display:inline;">Border Colour</label>
+                            <a style="text-decoration: none;" href="https://www.patreon.com/sdoehren?utm_source=Mainsite&utm_medium=Referral&utm_campaign=NPCOverlay" target="_blank" rel="noopener noreferrer">
+                                <p style="color: #FF424D;margin:0;display:inline;"><img class="card-img-top" src="img/Digital-Patreon-Logo_FieryCoral.png" alt="Patreon" style="height:20px;width:auto;"> only</p>
+                            </a>
+                        </div>
+                        <div class="col-6" >
+                            <input type='color' id='NameBorder-Colour' name='NameBorder-Colour' onchange='ColourChange(this)' value='#491b00' style="vertical-align:middle;">
+                            <input type='text' id='NameBorder-Text' name='NameBorder-Text' onchange='TextChange(this)' value='#491b00' style = "vertical-align:middle;text-align: center;" size="8">
+                        </div>
                     </div>
-                    <div class="col">
-                        <label id= 'NameBackground1-Label' for='NameBackground1-Colour'>Background Colour 1</label><br>
-                        <a style="text-decoration: none;" href="https://www.patreon.com/sdoehren?utm_source=Mainsite&utm_medium=Referral&utm_campaign=NPCOverlay" target="_blank" rel="noopener noreferrer">
-                            <p style="color: #FF424D;margin:0;"><img class="card-img-top" src="img/Digital-Patreon-Logo_FieryCoral.png" alt="Patreon" style="height:20px;width:auto;"> only</p>
-                        </a>
-                        <input type='color' id='NameBackground1-Colour' name='NameBackground1-Colour' onchange='ColourChange(this)' value='#b57340'><br>
-                        <input type='text' id='NameBackground1-Text' name='NameBackground1-Text' onchange='TextChange(this)' value='#b57340' style = "text-align: center;" size="8">
+
+                    <div class="row row-bottom-margin">
+                        <div class="col-6">
+                            <label id= 'NameBackground1-Label' for='NameBackground1-Colour' style="vertical-align:middle; display:inline;">Background Colour 1</label>
+                            <a style="text-decoration: none;" href="https://www.patreon.com/sdoehren?utm_source=Mainsite&utm_medium=Referral&utm_campaign=NPCOverlay" target="_blank" rel="noopener noreferrer">
+                                <p style="color: #FF424D;margin:0;display:inline;"><img class="card-img-top" src="img/Digital-Patreon-Logo_FieryCoral.png" alt="Patreon" style="height:20px;width:auto;"> only</p>
+                            </a>
+                        </div>
+                        <div class="col-6" >
+                            <input type='color' id='NameBackground1-Colour' name='NameBackground1-Colour' onchange='ColourChange(this)' value='#b57340' style="vertical-align:middle;">
+                            <input type='text' id='NameBackground1-Text' name='NameBackground1-Text' onchange='TextChange(this)' value='#b57340' style = "vertical-align:middle;text-align: center;" size="8">
+                        </div>
                     </div>
-                    <div class="col">
-                        <label id= 'NameBackground2-Label' for='NameBackground2-Colour'>Background Colour 2</label><br>
-                        <a style="text-decoration: none;" href="https://www.patreon.com/sdoehren?utm_source=Mainsite&utm_medium=Referral&utm_campaign=NPCOverlay" target="_blank" rel="noopener noreferrer">
-                            <p style="color: #FF424D;margin:0;"><img class="card-img-top" src="img/Digital-Patreon-Logo_FieryCoral.png" alt="Patreon" style="height:20px;width:auto;"> only</p>
-                        </a>
-                        <input type='color' id='NameBackground2-Colour' name='NameBackground-Colour' onchange='ColourChange(this)' value='#7b4319'><br>
-                        <input type='text' id='NameBackground2-Text' name='NameBackground2-Text' onchange='TextChange(this)' value='#7b4319' style = "text-align: center;" size="8">
+
+                    <div class="row row-bottom-margin">
+                        <div class="col-6">
+                            <label id= 'NameBackground2-Label' for='NameBackground2-Colour' style="vertical-align:middle; display:inline;">Background Colour 2</label>
+                            <a style="text-decoration: none;" href="https://www.patreon.com/sdoehren?utm_source=Mainsite&utm_medium=Referral&utm_campaign=NPCOverlay" target="_blank" rel="noopener noreferrer">
+                                <p style="color: #FF424D;margin:0;display:inline;"><img class="card-img-top" src="img/Digital-Patreon-Logo_FieryCoral.png" alt="Patreon" style="height:20px;width:auto;"> only</p>
+                            </a>
+                        </div>
+                        <div class="col-6" >
+                            <input type='color' id='NameBackground2-Colour' name='NameBackground2-Colour' onchange='ColourChange(this)' value='#7b4319' style="vertical-align:middle;">
+                            <input type='text' id='NameBackground2-Text' name='NameBackground1-Text' onchange='TextChange(this)' value='#7b4319' style = "vertical-align:middle;text-align: center;" size="8">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-4">
-                <div class="row row-bottom-margin">
-                    <h3>Output</h3>
-                    <div class="col">
-                        <br>
-                        <input type='text' id='output' name='output' value='None' style = "width:90%;text-align: left;"><br>
-                        <button class="btn btn-secondary" onclick="Copyoutput()">Copy Output</button>
+
+                <div class="col-4">
+                    <h3>Message Plaque</h3>
+                    <div class="row row-bottom-margin">
+                        <div class="col-6">
+                            <label id= 'MessageFont-Label' for='MessageFont-Colour' style="vertical-align:middle; display:inline;">Font Colour</label>
+                            <a style="text-decoration: none;" href="https://www.patreon.com/sdoehren?utm_source=Mainsite&utm_medium=Referral&utm_campaign=NPCOverlay" target="_blank" rel="noopener noreferrer">
+                                <p style="color: #FF424D;margin:0;display:inline;"><img class="card-img-top" src="img/Digital-Patreon-Logo_FieryCoral.png" alt="Patreon" style="height:20px;width:auto;"> only</p>
+                            </a>
+                        </div>
+                        <div class="col-6" >
+                            <input type='color' id='MessageFont-Colour' name='MessageFont-Colour' onchange='ColourChange(this)' value='#ffffff' style="vertical-align:middle;">
+                            <input type='text' id='MessageFont-Text' name='MessageFont-Text' onchange='TextChange(this)' value='#ffffff' style = "vertical-align:middle;text-align: center;" size="8">
+                        </div>
+                    </div>
+                    <div class="row row-bottom-margin">
+                        <div class="col-6">
+                            <label id= 'MessageBorder-Label' for='MessageBorder-Colour' style="vertical-align:middle; display:inline;">Border Colour</label>
+                            <a style="text-decoration: none;" href="https://www.patreon.com/sdoehren?utm_source=Mainsite&utm_medium=Referral&utm_campaign=NPCOverlay" target="_blank" rel="noopener noreferrer">
+                                <p style="color: #FF424D;margin:0;display:inline;"><img class="card-img-top" src="img/Digital-Patreon-Logo_FieryCoral.png" alt="Patreon" style="height:20px;width:auto;"> only</p>
+                            </a>
+                        </div>
+                        <div class="col-6" >
+                            <input type='color' id='MessageBorder-Colour' name='MessageBorder-Colour' onchange='ColourChange(this)' value='#491b00' style="vertical-align:middle;">
+                            <input type='text' id='MessageBorder-Text' name='MessageBorder-Text' onchange='TextChange(this)' value='#491b00' style = "vertical-align:middle;text-align: center;" size="8">
+                        </div>
+                    </div>
+
+                    <div class="row row-bottom-margin">
+                        <div class="col-6">
+                            <label id= 'MessageBackground1-Label' for='MessageBackground1-Colour' style="vertical-align:middle; display:inline;">Background Colour 1</label>
+                            <a style="text-decoration: none;" href="https://www.patreon.com/sdoehren?utm_source=Mainsite&utm_medium=Referral&utm_campaign=NPCOverlay" target="_blank" rel="noopener noreferrer">
+                                <p style="color: #FF424D;margin:0;display:inline;"><img class="card-img-top" src="img/Digital-Patreon-Logo_FieryCoral.png" alt="Patreon" style="height:20px;width:auto;"> only</p>
+                            </a>
+                        </div>
+                        <div class="col-6" >
+                            <input type='color' id='MessageBackground1-Colour' name='MessageBackground1-Colour' onchange='ColourChange(this)' value='#b57340' style="vertical-align:middle;">
+                            <input type='text' id='MessageBackground1-Text' name='MessageBackground1-Text' onchange='TextChange(this)' value='#b57340' style = "vertical-align:middle;text-align: center;" size="8">
+                        </div>
+                    </div>
+
+                    <div class="row row-bottom-margin">
+                        <div class="col-6">
+                            <label id= 'MessageBackground2-Label' for='MessageBackground2-Colour' style="vertical-align:middle; display:inline;">Background Colour 2</label>
+                            <a style="text-decoration: none;" href="https://www.patreon.com/sdoehren?utm_source=Mainsite&utm_medium=Referral&utm_campaign=NPCOverlay" target="_blank" rel="noopener noreferrer">
+                                <p style="color: #FF424D;margin:0;display:inline;"><img class="card-img-top" src="img/Digital-Patreon-Logo_FieryCoral.png" alt="Patreon" style="height:20px;width:auto;"> only</p>
+                            </a>
+                        </div>
+                        <div class="col-6" >
+                            <input type='color' id='MessageBackground2-Colour' name='MessageBackground2-Colour' onchange='ColourChange(this)' value='#7b4319' style="vertical-align:middle;">
+                            <input type='text' id='MessageBackground2-Text' name='MessageBackground1-Text' onchange='TextChange(this)' value='#7b4319' style = "vertical-align:middle;text-align: center;" size="8">
+                        </div>
                     </div>
                 </div>
+
             </div>
 
-            <div class="col-4">
+
+            <div class="row row-bottom-margin">
                 <div class="row row-bottom-margin">
-                    <h3>Message Plaque</h3>
+                    <h3 style="margin:0;">Output</h3>
                     <div class="col">
-                        <label id= 'MessageFont-Label' for='MessageFont-Colour'>Font Colour</label><br>
-                        <a style="text-decoration: none;" href="https://www.patreon.com/sdoehren?utm_source=Mainsite&utm_medium=Referral&utm_campaign=NPCOverlay" target="_blank" rel="noopener noreferrer">
-                            <p style="color: #FF424D;margin:0;"><img class="card-img-top" src="img/Digital-Patreon-Logo_FieryCoral.png" alt="Patreon" style="height:20px;width:auto;"> only</p>
-                        </a>
-                        <input type='color' id='MessageFont-Colour' name='MessageFont-Colour' onchange='ColourChange(this)' value='#ffffff'><br>
-                        <input type='text' id='MessageFont-Text' name='MessageFont-Text' onchange='TextChange(this)' value='#ffffff' style = "text-align: center;" size="8"><br>
-                    </div>
-                    <div class="col">
-                        <label id= 'MessageBorder-Label' for='MessageBorder-Colour'>Border Colour</label><br>
-                        <a style="text-decoration: none;" href="https://www.patreon.com/sdoehren?utm_source=Mainsite&utm_medium=Referral&utm_campaign=NPCOverlay" target="_blank" rel="noopener noreferrer">
-                            <p style="color: #FF424D;margin:0;"><img class="card-img-top" src="img/Digital-Patreon-Logo_FieryCoral.png" alt="Patreon" style="height:20px;width:auto;"> only</p>
-                        </a>
-                        <input type='color' id='MessageBorder-Colour' name='MessageBorder-Colour' onchange='ColourChange(this)' value='#491b00'><br>
-                        <input type='text' id='MessageBorder-Text' name='MessageBorder-Text' onchange='TextChange(this)' value='#491b00' style = "text-align: center;" size="8"><br>
-                    </div>
-                    <div class="col">
-                        <label id= 'MessageBackground1-Label' for='MessageBackground1-Colour'>Background Colour 1</label><br>
-                        <a style="text-decoration: none;" href="https://www.patreon.com/sdoehren?utm_source=Mainsite&utm_medium=Referral&utm_campaign=NPCOverlay" target="_blank" rel="noopener noreferrer">
-                            <p style="color: #FF424D;margin:0;"><img class="card-img-top" src="img/Digital-Patreon-Logo_FieryCoral.png" alt="Patreon" style="height:20px;width:auto;"> only</p>
-                        </a>
-                        <input type='color' id='MessageBackground1-Colour' name='MessageBackground1-Colour' onchange='ColourChange(this)' value='#b57340'><br>
-                        <input type='text' id='MessageBackground1-Text' name='MessageBackground1-Text' onchange='TextChange(this)' value='#b57340' style = "text-align: center;" size="8"><br>
-                    </div>
-                    <div class="col">
-                        <label id= 'MessageBackground2-Label' for='MessageBackground2-Colour'>Background Colour 2</label><br>
-                        <a style="text-decoration: none;" href="https://www.patreon.com/sdoehren?utm_source=Mainsite&utm_medium=Referral&utm_campaign=NPCOverlay" target="_blank" rel="noopener noreferrer">
-                            <p style="color: #FF424D;margin:0;"><img class="card-img-top" src="img/Digital-Patreon-Logo_FieryCoral.png" alt="Patreon" style="height:20px;width:auto;"> only</p>
-                        </a>
-                        <input type='color' id='MessageBackground2-Colour' name='MessageBackground2-Colour' onchange='ColourChange(this)' value='#7b4319'><br>
-                        <input type='text' id='MessageBackground2-Text' name='MessageBackground2-Text' onchange='TextChange(this)' value='#7b4319' style = "text-align: center;" size="8"><br>
+                        <input type='text' id='output' name='output' value='None' style = "width:90%;text-align: left;"><br>
+                        <button class="btn btn-secondary" onclick="Copyoutput()">Copy Output</button>
                     </div>
                 </div>
             </div>
@@ -304,6 +369,20 @@
 
 
 <script>
+    function Hideform(){
+        var hidebutton = document.getElementById("hidebutton");
+
+        if (hidebutton.value === "false"){
+            hidebutton.value = "true";
+            hidebutton.innerHTML = "Show Form";
+            document.getElementById("FormDiv").style.display = "none";
+        } else {
+            hidebutton.value = "false";
+            hidebutton.innerHTML = "Hide Form";
+            document.getElementById("FormDiv").style.display = "block";
+        }
+    }
+
     function Copyoutput() {
       /* Get the text field */
       var copyText = document.getElementById("output");
@@ -350,6 +429,7 @@
 
 async function generateOverlay() {
     document.getElementById('NPCOverlay').style.display = 'none'
+
 
     let imageUrl = document.getElementById('ImageLoc').value
     let message = document.getElementById('Message').value
@@ -403,9 +483,8 @@ async function generateOverlay() {
         bg2:document.getElementById('MessageBackground2-Text').value
     }}
 
-
     var OutputText = document.getElementById("output");
-    OutputText.value = JSON.stringify(formdata)
+    OutputText.value = document.getElementById('OverlayName').value+":"+JSON.stringify(formdata)
 
 }
 

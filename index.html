@@ -21,7 +21,7 @@
     color: #E8E8E8;
     font-family: 'Lato';
 }
-        .container-fluid {padding: 50px 25px 25px 25px;}
+        .container-fluid {padding: 10px 25px 25px 25px;}
 
         .stretched-link::after {
     position: absolute;
@@ -38,6 +38,7 @@
         .card {
     margin: 5px !important;
  }
+        .row-low-margin { margin:5px !important; }
     </style>
 </head>
 
@@ -63,7 +64,7 @@
     </div>
 
     <div class="container-fluid">
-        <div class="row">
+        <div class="row row-low-margin">
             <p>
                 <a href="https://ko-fi.com/sdoehren" target="_blank" rel="noopener noreferrer">
                     <img src="https://img.shields.io/badge/ko--fi-Support%20Me-red?style=flat-square&amp;logo=ko-fi" alt="ko-fi"></a>
@@ -74,7 +75,6 @@
             </p>
 
         </div>
-        <br>
 
         <div class="card-group">
             <div class="card text-white bg-dark">
@@ -89,10 +89,12 @@
                 <img class="card-img-top" src="img/Logo-Centred.webp" alt="Always Centred">
                 <div class="card-body">
                     <h5 class="card-title">Always Centred</h5>
-                    <p class="card-text">Always Centred continuously centres and zooms the view on player owned characters or the currently selected token.</p>
+                    <p class="card-text">Always Centred is a <a href="https://foundryvtt.com/" target="_blank">Foundry VTT</a> module continuously centres and zooms the view on player owned characters or the currently selected token.</p>
                 </div>
                 <a href="https://github.com/SDoehren/always-centred" class="btn btn-outline-light" target="_blank">Go to Project</a>
             </div>
+        </div>
+        <div class="card-group">
             <div class="card text-white bg-dark">
                 <img class="card-img-top" src="img/Logo-Rollforpoints.webp" alt="Roll for Points Buy">
                 <div class="card-body">
@@ -100,6 +102,14 @@
                     <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
                 </div>
                 <a href="/RollingForPointsBuy.html" class="btn btn-outline-light" target="_blank">Go to Project</a>
+            </div>
+            <div class="card mb-1 text-white bg-dark">
+                <img class="card-img-top" src="img/Logo-addashidden.webp" alt="Roll for Points Buy">
+                <div class="card-body">
+                    <h5 class="card-title">Add as Hidden</h5>
+                    <p class="card-text">Add As Hidden is a simple module for <a href="https://foundryvtt.com/" target="_blank">Foundry VTT</a> that allows for characters to be added to the combat tracker as hidden regardless of the visibility of the token.</p>
+                </div>
+                <a href="https://github.com/SDoehren/add-as-hidden" class="btn btn-outline-light" target="_blank">Go to Project</a>
             </div>
         </div>
     </div>
