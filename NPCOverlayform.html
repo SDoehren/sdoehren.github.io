@@ -394,7 +394,7 @@
     let textid = selectObject.id.substring(0, dashloc)+"-Text"
     let textel = document.getElementById(textid);
     textel.value = value;
-    generateOverlay('This is a Test Message')
+    generateOverlay()
   }
 
   function TextChange(selectObject) {
@@ -403,7 +403,7 @@
     let colourid = selectObject.id.substring(0, dashloc)+"-Colour"
     let colourel = document.getElementById(colourid);
     colourel.value = value;
-    generateOverlay('This is a Test Message')
+    generateOverlay()
   }
 
   async function loadImage(imageUrl) {

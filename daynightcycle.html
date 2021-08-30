@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>SDoehren's NPC Overlay</title>
+    <link rel="icon" href="img/logo.png">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+    <style>
+        h1 {text-align: center;}
+        p {text-align: center;}
+        div {text-align: center;}
+
+
+        body {
+    background-color: #454545;
+    color: #E8E8E8;
+    font-family: 'Lato';
+}
+        .container-fluid {padding: 5px 25px 25px 25px;}
+
+        .row-bottom-margin { margin:0px; }
+
+    </style>
+</head>
+
+
+<body onload="updatechart()">
+    <div class="navbar navbar-expand-lg navbar-dark bg-dark" href="/">
+        <div class="d-flex flex-grow-1">
+            <a class="navbar-brand mx-auto" href="https://ko-fi.com/sdoehren" target="_blank" rel="noopener noreferrer">
+            <img src="https://img.shields.io/badge/ko--fi-Support%20Me-red?style=flat-square&amp;logo=ko-fi" alt="ko-fi"></a>
+            <a class="navbar-brand mx-auto" href="/">SDoehren<img src="img/logo.webp" alt="Logo" height="30"></a>
+            <a class="navbar-brand mx-auto" href="https://www.patreon.com/sdoehren?utm_source=Mainsite&utm_medium=Referral&utm_campaign=NPCOverlay_Header" target="_blank" rel="noopener noreferrer">
+            <img src="https://img.shields.io/badge/Patreon-Support%20Me-red?style=flat-square&amp;logo=patreon" alt="Patreon"></a>
+        </div>
+    </div>
+
+    <div class="container-fluid" style="z-index: 5;position:relative">
+        <div class="row row-bottom-margin">
+            <h1>Day Night Cycle</h1>
+            <div class="col-5"></div>
+            <div class="col-2">
+                <a href="https://github.com/SDoehren/NPCOverlay" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/badge/Github-Get%20Module-green?style=flat-square&amp;logo=github" alt="Patreon"></a>
+            </div>
+        </div>
+        <div id="FormDiv" style="background-color: rgba(80, 80, 80, 0.5);border-radius: 40px;">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Options</h3>
+                    <div class="row row-bottom-margin">
+                        <div class="col-5">
+                            <label id= 'sd-lab' for='sd-text'>Day Length Metric</label>
+                        </div>
+                        <div class="col-2">
+                            <input type='number'  id='sd-Text' name='sd-Text' onchange='TextChange(this)' min="0.01" value="0.13" step="0.01" style = "width:90%;text-align: center;">
+                        </div>
+                        <div class="col-5">
+                            <input type='range'  id='sd-Range' name='sd-Range' onchange='RangeChange(this)' min="0.01" max="1.00" value="0.13" step="0.01" style = "width:90%">
+                        </div>
+                    </div>
+                    <div class="row row-bottom-margin">
+                        <p style="margin:0px;color: #acacac;font-size: small;">Width of curve - recommended below 0.2</p>
+                    </div>
+                    <div class="row row-bottom-margin">
+                        <div class="col-5">
+                            <label id= 'stepsize-lab' for='sd-text'>Lighting Step Size</label>
+                        </div>
+                        <div class="col-2">
+                            <input type='number'  id='stepsize-Text' name='stepsize-Text' onchange='TextChange(this)' min="0.00001" max="1.00" value="0.05" step="0.01" style = "width:90%;text-align: center;">
+                        </div>
+                        <div class="col-5">
+                            <input type='range'  id='stepsize-Range' name='stepsize-Range' onchange='RangeChange(this)' min="0.00001" max="1.00" value="0.05" step="0.01" style = "width:90%">
+                        </div>
+                    </div>
+                    <div class="row row-bottom-margin">
+                        <p style="margin:0px;color: #acacac;font-size: small;">Size of jumps when adjusting light levels - High number bigger jumps but less often</p>
+                    </div>
+
+
+
+                    <div class="row row-bottom-margin">
+                        <div class="col-5">
+                            <label id= 'visionlimit-lab' for='sd-text'>Vision Limitation Threshold</label>
+                        </div>
+                        <div class="col-2">
+                            <input type='number'  id='visionlimit-Text' name='visionlimit-Text' onchange='TextChange(this)' min="0.01" max="1.00" value="0.1" step="0.01" style = "width:90%;text-align: center;">
+                        </div>
+                        <div class="col-5">
+                            <input type='range'  id='visionlimit-Range' name='visionlimit-Range' onchange='RangeChange(this)' min="0.01" max="1.00" value="0.1" step="0.01" style = "width:90%">
+                        </div>
+                    </div>
+                    <div class="row row-bottom-margin">
+                        <p style="margin:0px;color: #acacac;font-size: small;">Point at which visibility switches from light to dark</p>
+                    </div>
+                    <div class="row row-bottom-margin">
+                        <div class="col-4">
+                            <label id= 'hours-lab' for='hours'>Hours in Day</label>
+                        </div>
+                        <div class="col-2">
+                            <input type='number'  id='hours' name='hours' onchange='updatechart(this)' min="1" value="24" step="1" style = "width:90%;text-align: center;">
+                        </div>
+                        <div class="col-4">
+                            <label id= 'minutes-lab' for='minutes'>Minutes in Hour</label>
+                        </div>
+                        <div class="col-2">
+                            <input type='number'  id='minutes' name='minutes' onchange='updatechart(this)' min="1" value="60" step="1" style = "width:90%;text-align: center;">
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="col-6">
+                    <h3>Stats</h3>
+                    <div class="row row-bottom-margin">
+                        <div class="col-6">
+                            <label id= 'DaylightLength-Label' for='DaylightLength' style="vertical-align:middle; display:inline;">Daylight Length (Hours)</label>
+                        </div>
+                        <div class="col-6" >
+                            <input type='text' id='DaylightLength' name='DaylightLength' onchange='TextChange(this)' value='00.00' style = "vertical-align:middle;text-align: center;" size="8" disabled>
+                        </div>
+                    </div>
+                    <div class="row row-bottom-margin">
+                        <div class="col-6">
+                            <label id= 'Sunrise-Label' for='Sunrise' style="vertical-align:middle; display:inline;">Sunrise</label>
+                        </div>
+                        <div class="col-6" >
+                            <input type='text' id='Sunrise' name='Sunrise' onchange='TextChange(this)' value='00.00' style = "vertical-align:middle;text-align: center;" size="8" disabled>
+                        </div>
+                    </div>
+                    <div class="row row-bottom-margin">
+                        <div class="col-6">
+                            <label id= 'Sunset-Label' for='Sunset' style="vertical-align:middle; display:inline;">Sunset</label>
+                        </div>
+                        <div class="col-6" >
+                            <input type='text' id='Sunset' name='Sunset' onchange='TextChange(this)' value='00.00' style = "vertical-align:middle;text-align: center;" size="8" disabled>
+                        </div>
+                    </div>
+                    <div class="row row-bottom-margin">
+                        <div class="col-6">
+                            <label id= 'Steps-Label' for='Steps' style="vertical-align:middle; display:inline;">Steps</label>
+                        </div>
+                        <div class="col-6" >
+                            <input type='text' id='Steps' name='Steps' onchange='TextChange(this)' value='00.00' style = "vertical-align:middle;text-align: center;" size="8" disabled>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row row-bottom-margin">
+            <canvas id="line-chart"  width="600" height="200"></canvas>
+        </div>
+    </div>
+</body>
+
+
+<script>
+    function RangeChange(selectObject) {
+        let value = selectObject.value;
+        let dashloc = selectObject.id.search("-")
+        let textid = selectObject.id.substring(0, dashloc) + "-Text"
+        let textel = document.getElementById(textid);
+        textel.value = value;
+        updatechart()
+    }
+
+    function TextChange(selectObject) {
+        let value = selectObject.value;
+        let dashloc = selectObject.id.search("-")
+        let rangeid = selectObject.id.substring(0, dashloc) + "-Range"
+        let rangeel = document.getElementById(rangeid);
+        rangeel.value = value;
+        updatechart()
+    }
+
+    function updatechart(){
+        let labelpack = []
+        let datapack = []
+        let visionpack = []
+        let steppack = []
+        let sd = document.getElementById("sd-Text").value;
+        let mean = 0.5
+        let visioncutoff = document.getElementById("visionlimit-Text").value;
+        let definition = document.getElementById("stepsize-Text").value;
+        let hoursinday = document.getElementById("hours").value;
+        let minutesinhour = document.getElementById("minutes").value;
+        let lastS = 0
+        let steps = 0
+        let sunrise;
+        let sunset;
+
+
+        const minscore = (1 / (sd * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * (((0 - mean) / sd) ** 2))
+        const maxscore = (1 / (sd * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * (((0.5 - mean) / sd) ** 2))
+        const divisor = maxscore-minscore
+
+        for (let hr = 0; hr < hoursinday; hr++) {
+            for (let mins = 0; mins < minutesinhour; mins++) {
+                labelpack.push(String(hr).padStart(2, '0') + ":" + String(mins).padStart(2, '0'))
+
+                let s = ((score(sd, mean, (hr * minutesinhour + mins) / (hoursinday * minutesinhour)) - minscore) / divisor);
+                datapack.push(s)
+                let steppedS;
+                if (s < definition) {
+                    steppedS = 0
+                } else if (1 - s < definition) {
+                    steppedS = 1
+                } else if (Math.abs(s - lastS) < definition) {
+                    steppedS = lastS
+                } else if (lastS < visioncutoff && s >= visioncutoff) {
+                    steppedS = s
+                } else if (lastS > visioncutoff && s <= visioncutoff) {
+                    steppedS = s
+                } else {
+
+                    steppedS = Math.round(s / definition) * definition
+                    if (s - lastS > 0) {
+                        steppedS += definition / 2
+                    } else {
+                        steppedS -= definition / 2
+                    }
+                }
+
+                if (steppedS > visioncutoff && s <= visioncutoff) {
+                    steppedS = parseFloat(visioncutoff) - 0.01
+                } else if (steppedS < visioncutoff && s >= visioncutoff) {
+                    steppedS = parseFloat(visioncutoff) + 0.01
+                }
+
+                steppack.push(steppedS)
+
+                if (steppedS > visioncutoff) {
+                    visionpack.push(0)
+                } else {
+                    visionpack.push(1)
+                }
+
+                if (lastS !== steppedS) {
+                    steps += 1
+                }
+                lastS = steppedS
+
+                if (steppedS<=visioncutoff && sunset===undefined && sunrise!==undefined){
+                    sunset=String(hr).padStart(2, '0') + ":" + String(mins).padStart(2, '0')
+                }
+
+                if (steppedS>=visioncutoff && sunrise===undefined){
+                    sunrise=String(hr).padStart(2, '0') + ":" + String(mins).padStart(2, '0')
+                }
+
+            }
+        }
+
+        LightChart.data.labels = labelpack;
+        LightChart.options.scales.xAxes[0].ticks.maxTicksLimit = Math.min(hoursinday*2,80);
+        LightChart.data.datasets[0].data = datapack;
+        LightChart.data.datasets[1].data = steppack;
+        LightChart.data.datasets[2].data = visionpack;
+        LightChart.update();
+
+        /*Math.round(24-(visionpack.reduce((a, b) => a + b, 0)/60))*100)/100*/
+        document.getElementById('DaylightLength').value = Math.round((hoursinday-visionpack.reduce((a, b) => a + b, 0)/60)*100)/100
+
+        document.getElementById('Sunrise').value = sunrise
+
+        document.getElementById('Sunset').value = sunset
+
+        document.getElementById('Steps').value = steps
+
+    }
+
+    function score(sd, mean, X) {
+        return (1 / (sd * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * (((X - mean) / sd) ** 2))
+    }
+
+
+    let labelpack = []
+    let datapack = []
+    let visionpack = []
+    let steppack = []
+
+    for (let hr = 0; hr < document.getElementById("hours").value; hr++) {
+      for (let mins = 0; mins < document.getElementById("minutes").value; mins++) {
+          labelpack.push(String(hr).padStart(2, '0')+":"+String(mins).padStart(2, '0'))
+          datapack.push(0)
+          visionpack.push(0)
+          steppack.push(0)
+    }}
+
+    var LightChart =new Chart(document.getElementById("line-chart"), {
+        type: 'line',
+        data: {
+            labels: labelpack,
+            backgroundColor : "rgba(255,0,0,0.44)",
+            datasets: [{
+                data: datapack,
+                label: "Underlying Curve",
+                borderColor: "#3e95cd",
+                fill: false,
+                pointRadius: 0
+            },
+
+                {
+                    data: steppack,
+                    label: "Steps Used (what players will see)",
+                    borderColor: "#939393",
+                    fill: false,
+                    pointRadius: 0
+                },
+                {
+                    data: visionpack,
+                    label: "Character Vision Limited",
+                    borderColor: "#000000",
+                    fill: true,
+                    backgroundColor : "rgba(0,0,0,0.44)",
+                    pointRadius: 0
+                },
+            ]
+        },
+        options: {
+            animation: {
+            duration: 3000,},
+            title: {
+                display: true,
+                text: 'Light Curve for Day Night Cycle',
+                fontColor: "white",
+                    fontSize: 18
+            },
+            legend: {
+                labels: {
+                    fontColor: "white",
+                    fontSize: 12
+                }
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Time'
+                    },
+                    ticks: {
+                        autoSkip: true,
+                        maxTicksLimit: 48
+                    }
+
+                }],
+                yAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Light Level'
+                    },
+                    ticks: {
+                        min: 0,
+                        max: 1,
+
+                        // forces step size to be 5 units
+                        stepSize: 0.1 // <----- This prop sets the stepSize
+                    }
+                }]
+            }
+        }
+    });
+
+</script>
