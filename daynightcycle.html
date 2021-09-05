@@ -58,10 +58,10 @@
                             <label id= 'sd-lab' for='sd-text'>Day Length Metric</label>
                         </div>
                         <div class="col-2">
-                            <input type='number'  id='sd-Text' name='sd-Text' onchange='TextChange(this)' min="0.01" value="0.13" step="0.01" style = "width:90%;text-align: center;">
+                            <input type='number'  id='sd-Text' name='sd-Text' onchange='TextChange(this)' min="0.01" value="0.17" step="0.01" style = "width:90%;text-align: center;">
                         </div>
                         <div class="col-5">
-                            <input type='range'  id='sd-Range' name='sd-Range' onchange='RangeChange(this)' min="0.01" max="1.00" value="0.13" step="0.01" style = "width:90%">
+                            <input type='range'  id='sd-Range' name='sd-Range' onchange='RangeChange(this)' min="0.01" max="1.00" value="0.17" step="0.01" style = "width:90%">
                         </div>
                     </div>
                     <div class="row row-bottom-margin">
@@ -89,10 +89,10 @@
                             <label id= 'visionlimit-lab' for='visionlimit-Text'>Vision Limitation Threshold</label>
                         </div>
                         <div class="col-2">
-                            <input type='number'  id='visionlimit-Text' name='visionlimit-Text' onchange='TextChange(this)' min="0.01" max="1.00" value="0.1" step="0.01" style = "width:90%;text-align: center;">
+                            <input type='number'  id='visionlimit-Text' name='visionlimit-Text' onchange='TextChange(this)' min="0.01" max="1.00" value="0.75" step="0.01" style = "width:90%;text-align: center;">
                         </div>
                         <div class="col-5">
-                            <input type='range'  id='visionlimit-Range' name='visionlimit-Range' onchange='RangeChange(this)' min="0.01" max="1.00" value="0.1" step="0.01" style = "width:90%">
+                            <input type='range'  id='visionlimit-Range' name='visionlimit-Range' onchange='RangeChange(this)' min="0.01" max="1.00" value="0.75" step="0.01" style = "width:90%">
                         </div>
                     </div>
                     <div class="row row-bottom-margin">
@@ -123,7 +123,15 @@
                             <label id= 'DaylightLength-Label' for='DaylightLength' style="vertical-align:middle; display:inline;">Daylight Length (Hours)</label>
                         </div>
                         <div class="col-6" >
-                            <input type='text' id='DaylightLength' name='DaylightLength' onchange='TextChange(this)' value='00.00' style = "vertical-align:middle;text-align: center;" size="8" disabled>
+                            <input type='text' id='DaylightLength' name='DaylightLength' value='00.00' style = "vertical-align:middle;text-align: center;" size="8" disabled>
+                        </div>
+                    </div>
+                    <div class="row row-bottom-margin">
+                        <div class="col-6">
+                            <label id= 'DaylightLengthMinutes-Label' for='DaylightLengthMinutes' style="vertical-align:middle; display:inline;">Daylight Length (Minutes)</label>
+                        </div>
+                        <div class="col-6" >
+                            <input type='text' id='DaylightLengthMinutes' name='DaylightLengthMinutes' value='00.00' style = "vertical-align:middle;text-align: center;" size="8" disabled>
                         </div>
                     </div>
                     <div class="row row-bottom-margin">
@@ -190,7 +198,7 @@
         let steppack = []
         let sd = document.getElementById("sd-Text").value;
         let mean = 0.5
-        let visioncutoff = document.getElementById("visionlimit-Text").value;
+        let visioncutoff = 1-document.getElementById("visionlimit-Text").value;
         let definition = document.getElementById("stepsize-Text").value;
         let hoursinday = document.getElementById("hours").value;
         let minutesinhour = document.getElementById("minutes").value;
@@ -209,7 +217,7 @@
                 labelpack.push(String(hr).padStart(2, '0') + ":" + String(mins).padStart(2, '0'))
 
                 let s = ((score(sd, mean, (hr * minutesinhour + mins) / (hoursinday * minutesinhour)) - minscore) / divisor);
-                datapack.push(s)
+
                 let steppedS;
                 if (s < definition) {
                     steppedS = 0
@@ -237,7 +245,8 @@
                     steppedS = parseFloat(visioncutoff) + 0.001
                 }
 
-                steppack.push(steppedS)
+                datapack.push(1-s)
+                steppack.push(1-steppedS)
 
                 if (steppedS > visioncutoff) {
                     visionpack.push(0)
@@ -269,7 +278,8 @@
         LightChart.update();
 
         /*Math.round(24-(visionpack.reduce((a, b) => a + b, 0)/60))*100)/100*/
-        document.getElementById('DaylightLength').value = Math.round((hoursinday-visionpack.reduce((a, b) => a + b, 0)/60)*100)/100
+        document.getElementById('DaylightLength').value = Math.round((hoursinday-visionpack.reduce((a, b) => a + b, 0)/minutesinhour)*100)/100
+        document.getElementById('DaylightLengthMinutes').value = Math.round(((hoursinday*minutesinhour)-visionpack.reduce((a, b) => a + b, 0)))
 
         document.getElementById('Sunrise').value = sunrise
 
@@ -301,28 +311,33 @@
         type: 'line',
         data: {
             labels: labelpack,
-            backgroundColor : "rgba(255,0,0,0.44)",
-            datasets: [{
-                data: datapack,
-                label: "Underlying Curve",
-                borderColor: "#3e95cd",
-                fill: false,
-                pointRadius: 0
-            },
+            backgroundColor: "rgba(255,0,0,0.44)",
+            datasets: [
+                {
+                    data: datapack,
+                    label: "Underlying Curve",
+                    borderColor: "#0f80bd",
+                    fill: false,
+                    pointRadius: 0,
+                    borderDash: [5,5]
+
+
+                },
 
                 {
                     data: steppack,
                     label: "Steps Used (what players will see)",
                     borderColor: "#939393",
                     fill: false,
-                    pointRadius: 0
+                    pointRadius: 0,
+
                 },
                 {
                     data: visionpack,
                     label: "Character Vision Limited",
                     borderColor: "#000000",
                     fill: true,
-                    backgroundColor : "rgba(0,0,0,0.44)",
+                    backgroundColor: "rgba(0,0,0,0.44)",
                     pointRadius: 0
                 },
             ]
@@ -359,7 +374,7 @@
                     display: true,
                     scaleLabel: {
                         display: true,
-                        labelString: 'Light Level'
+                        labelString: 'Darkness Level'
                     },
                     ticks: {
                         min: 0,
