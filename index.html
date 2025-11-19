@@ -10,105 +10,93 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <style>
-        h1 {text-align: center;}
-        p {text-align: center;}
-        div {text-align: center;}
+    <link rel="stylesheet" href="css/main.css">
 
-        input[type="number"] {font-size:30px; font-weight: bold;}
-
-        body {
-    background-color: #454545;
-    color: #E8E8E8;
-    font-family: 'Lato';
-}
-        .container-fluid {padding: 10px 25px 25px 25px;}
-
-        .stretched-link::after {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-    pointer-events: auto;
-    content: "";
-    background-color: rgba(0,0,0,0);
-}
-
-        .card {
-    margin: 5px !important;
- }
-        .row-low-margin { margin:5px !important; }
-    </style>
 </head>
 
 
 
 <body>
 
-    <div class="container-fluid full-width">
-        <div class="row" style="background-color: #212529">
+    <div class="container-fluid full-width header">
+        <div class="row" >
             <div class="col d-flex justify-content-center">
                 <a href="/" style="color: whitesmoke;text-decoration: none;"><h2>SDoehren
                 <img src="img/logo.webp" alt="Logo" height="30"></h2></a>
             </div>
         </div>
-        <div class="row" style="background-color: #212529">
+        <div class="row" >
             <div class="col d-flex justify-content-center">
-                <a class="navbar-brand mx-auto" href="https://ko-fi.com/sdoehren" target="_blank" rel="noopener noreferrer">
-        <img src="https://img.shields.io/badge/ko--fi-Support%20Me-red?style=flat-square&amp;logo=ko-fi" alt="ko-fi"></a>
+                <p>
+                <a href="https://ko-fi.com/sdoehren" target="_blank" rel="noopener noreferrer">
+                    <img src="https://img.shields.io/badge/ko--fi-Support%20Me-red?style=flat-square&amp;logo=ko-fi" alt="ko-fi"></a>
+                <a href="https://www.patreon.com/bePatron?u=49614365" target="_blank" rel="noopener noreferrer">
+                    <img src="https://img.shields.io/badge/Patreon-Support%20Me-red?style=flat-square&amp;logo=patreon" alt="Patreon"></a>
+            </p>
             </div>
         </div>
     </div>
 
     <div class="container-fluid">
-        <h1>In Development</h1>
-        <div class="card-group">
-            <div class="card text-white bg-dark">
+        <div class="row">
 
-                <div class="card-body">
-                    <h5 class="card-title">Dodgy Dice</h5>
-                    <p class="card-text">Time to test those wonky dice of yours.</p>
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-3 mb-sm-0  d-flex align-items-stretch">
+                <div class="card text-white header" style="width: 18rem;">
+                  <div class="card-body">
+                      <h7>In Development</h7>
+                    <h2 class="card-title">Dodgy Dice</h2>
+                      <p class="card-text">Time to test those wonky dice of yours.</p>
+                  </div>
                 </div>
-                <a href="/dodgy-dice" class="btn btn-outline-light" target="_blank">Go to Project</a>
             </div>
-            <div class="card text-white bg-dark">
-                <img class="card-img-top" src="img/Logo-Rollforpoints.webp" alt="Roll for Points Buy">
-                <div class="card-body">
-                    <h5 class="card-title">Rolling for Points Buy</h5>
-                    <p class="card-text">Sick of the rolling vs points buy argument?  Do Both!</p>
-                </div>
-                <a href="/RollingForPointsBuy.html" class="btn btn-outline-light" target="_blank">Go to Project</a>
-            </div>
-        </div>
 
-        <h1>Depreciated</h1>
-        <div class="card-group">
-            <div class="card text-white bg-dark">
-                <img class="card-img-top" src="img/Logo-Tension.webp" alt="Tension Pool">
-                <div class="card-body">
-                    <h5 class="card-title">Tension Pool</h5>
-                    <p class="card-text">Tension Pool is a <a href="https://foundryvtt.com/" target="_blank">Foundry VTT</a> Implementation and Evolution of the Angry GM&#39;s idea of <a href="https://theangrygm.com/making-things-complicated/" target="_blank">Time Pools/Tension Pools</a>.</p>
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-3 mb-sm-0  d-flex align-items-stretch">
+                <div class="card text-white header" style="width: 18rem;">
+                  <div class="card-body">
+                      <h7>In Development</h7>
+                    <h2 class="card-title">Rolling for Points Buy</h2>
+                      <p class="card-text">Sick of the rolling vs points buy argument?  Do Both!</p>
+                  </div>
+                    <a href="https://sdoehren.com/RollingForPointsBuy.html" class="btn btn-outline-light" target="_blank">Go to Project</a>
                 </div>
-                <a href="https://github.com/SDoehren/tension-pool" class="btn btn-outline-light" target="_blank">Go to Project</a>
             </div>
-            <div class="card text-white bg-dark">
-                <img class="card-img-top" src="img/Logo-Centred.webp" alt="Always Centred">
-                <div class="card-body">
-                    <h5 class="card-title">Always Centred</h5>
-                    <p class="card-text">Always Centred is a <a href="https://foundryvtt.com/" target="_blank">Foundry VTT</a> module continuously centres and zooms the view on player owned characters or the currently selected token.</p>
+
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-3 mb-sm-0  d-flex align-items-stretch">
+                <div class="card text-white header" style="width: 18rem;">
+                  <div class="card-body">
+                      <h7>Depreciated</h7>
+                    <h2 class="card-title">Tension Pool</h2>
+                      <p class="card-text">Tension Pool is a <a href="https://foundryvtt.com/" target="_blank">Foundry VTT</a> Implementation and Evolution of the Angry GM&#39;s idea of <a href="https://theangrygm.com/making-things-complicated/" target="_blank">Time Pools/Tension Pools</a>.</p>
+                  </div>
+                    <a href="https://github.com/SDoehren/tension-pool" class="btn btn-outline-light" target="_blank">Go to Project</a>
                 </div>
-                <a href="https://github.com/SDoehren/always-centred" class="btn btn-outline-light" target="_blank">Go to Project</a>
             </div>
-            <div class="card mb-1 text-white bg-dark">
-                <img class="card-img-top" src="img/Logo-addashidden.webp" alt="Roll for Points Buy">
-                <div class="card-body">
-                    <h5 class="card-title">Add as Hidden</h5>
-                    <p class="card-text">Add As Hidden is a simple module for <a href="https://foundryvtt.com/" target="_blank">Foundry VTT</a> that allows for characters to be added to the combat tracker as hidden regardless of the visibility of the token.</p>
+
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-3 mb-sm-0  d-flex align-items-stretch">
+                <div class="card text-white header" style="width: 18rem;">
+                  <div class="card-body">
+                      <h7>Depreciated</h7>
+                    <h2 class="card-title">Day Night Cycle</h2>
+                      <p class="card-text">Day Night Cycle is a <a href="https://foundryvtt.com/" target="_blank">Foundry VTT</a> module that automatically changes the lighting levels to reflect the time of day based on the time in Simple Calendar..</p>
+                  </div>
+                    <a href="https://github.com/SDoehren/day-night-cycle" class="btn btn-outline-light" target="_blank">Go to Project</a>
+                    <a href="https://sdoehren.com/daynightcycle" class="btn btn-outline-light" target="_blank">Day Night Mapper</a>
+
+
                 </div>
-                <a href="https://github.com/SDoehren/add-as-hidden" class="btn btn-outline-light" target="_blank">Go to Project</a>
             </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-3 mb-sm-0  d-flex align-items-stretch">
+                <div class="card text-white header" style="width: 18rem;">
+                  <div class="card-body">
+                      <h7>Depreciated</h7>
+                    <h2 class="card-title">Always Centred</h2>
+                      <p class="card-text">Always Centred is a <a href="https://foundryvtt.com/" target="_blank">Foundry VTT</a> module continuously centres and zooms the view on player owned characters or the currently selected token.</p>
+                  </div>
+                    <a href="https://github.com/SDoehren/always-centred" class="btn btn-outline-light" target="_blank">Go to Project</a>
+                </div>
+            </div>
+
         </div>
     </div>
 </body>

@@ -1,0 +1,75 @@
+h1 {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+    margin: 1px;
+}
+
+div {
+    text-align: center;
+}
+
+input[type="number"] {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.header {
+    background-color: #1d103a;
+}
+
+body {
+    background-color: #572ea6;
+    color: #E8E8E8;
+    font-family: 'Lato';
+}
+
+.error {
+    background-color: #120923;
+    color: #8a0000;
+    font-family: 'Lato';
+}
+
+
+.accordbutdark {
+    background-color: #432281 !important;
+    color: #FFFFFFFF !important;
+    text-align: center;
+}
+
+.accordboddark {
+    background-color: #2f185c !important;
+}
+
+
+.container-fluid {
+    padding: 25px 25px 25px 25px;
+}
+
+
+.full-width {
+    padding: 0px 0.8% 0px 0px;
+}
+
+.stretched-link::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: auto;
+    content: "";
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.card {
+    margin: 5px !important;
+}
+
+.row-low-margin {
+    margin: 5px !important;
+}
+
