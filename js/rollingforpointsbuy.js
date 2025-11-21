@@ -410,22 +410,21 @@ function randomiseroll(roll) {
                 rolls = [getRandomInt(6), getRandomInt(6), getRandomInt(6)];
                 sumval = rolls.reduce((a, b) => a + b, 0);
                 break;
-            case "1d20":
-                rolls = [getRandomInt(20)];
+            case "1d100":
+                rolls = [getRandomInt(100)];
                 sumval = rolls.reduce((a, b) => a + b, 0);
 
         }
         rollresults.push(sumval);
     }
 
-
-    rollresults.sort(function (a, b) {
-        return b - a;
-    });
     for (i = 0; i < 6; i++) {
         let a = i + 1
         var s = document.getElementById("Roll" + a);
         s.value = rollresults[i];
     }
+    rollresults.sort(function (a, b) {
+        return b - a;
+    });
     main(rollresults);
 }
